@@ -1,0 +1,15 @@
+{
+  "name": "luna-seguros",
+  "version": "1.0.0",
+  "description": "Site Luna Seguros — Corretora de Seguros na Barra da Tijuca, RJ",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "echo 'static'"
+  },
+  "dependencies": {
+    "@vercel/og": "^0.6.0"
+  }
+}

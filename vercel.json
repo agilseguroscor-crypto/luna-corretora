@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "framework": null,
+  "rewrites": [
+    { "source": "/seguro-auto", "destination": "/seguro-auto.html" },
+    { "source": "/plano-saude", "destination": "/plano-saude.html" },
+    { "source": "/seguro-moto", "destination": "/seguro-moto.html" },
+    { "source": "/seguro-caminhao", "destination": "/seguro-caminhao.html" },
+    { "source": "/seguro-viagem", "destination": "/seguro-viagem.html" },
+    { "source": "/consorcio", "destination": "/consorcio.html" },
+    { "source": "/blog", "destination": "/blog/index.html" },
+    { "source": "/blog/:slug", "destination": "/blog/:slug.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
+      ]
+    }
+  ]
+}
