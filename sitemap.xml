@@ -19,4 +19,6 @@
   <url><loc>https://lunaseguros.com.br/blog/rctr-c-seguro-obrigatorio-caminhao</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://lunaseguros.com.br/blog/melhores-planos-de-saude-rj</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://lunaseguros.com.br/blog</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://lunaseguros.com.br/privacidade</loc><priority>0.4</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://lunaseguros.com.br/termos</loc><priority>0.4</priority><changefreq>yearly</changefreq></url>
 </urlset>
