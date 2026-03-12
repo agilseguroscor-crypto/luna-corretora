@@ -14,7 +14,8 @@
     { "source": "/blog/:slug", "destination": "/blog/:slug.html" },
     { "source": "/privacidade", "destination": "/privacidade.html" },
     { "source": "/termos", "destination": "/termos.html" },
-    { "source": "/obrigado", "destination": "/obrigado.html" }
+    { "source": "/obrigado", "destination": "/obrigado.html" },
+    { "source": "/links-uteis", "destination": "/links-uteis.html" }
   ],
   "headers": [
     {

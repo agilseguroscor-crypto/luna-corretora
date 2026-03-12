@@ -201,7 +201,7 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 .ra-bot-logo{width:32px;height:32px;border-radius:6px;background:#e8392b;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:.72rem;font-weight:900;flex-shrink:0}
 .ra-bot-text div:first-child{font-family:var(--fh);font-size:.78rem;font-weight:800;color:rgba(255,255,255,.6)}
 .ra-bot-text div:last-child{font-size:.68rem;color:rgba(255,255,255,.35)}
-.chat-widget{position:fixed;bottom:24px;right:24px;z-index:1000;display:flex;flex-direction:column;align-items:flex-end;gap:12px;pointer-events:none}
+.chat-widget{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:12px;pointer-events:none}
 .chat-window{width:380px;height:580px;background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);overflow:hidden;display:flex;flex-direction:column;transform:scale(.92) translateY(20px);opacity:0;pointer-events:none;transition:all .28s cubic-bezier(.4,0,.2,1);transform-origin:bottom right}
 .chat-window.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
 .chat-header{background:var(--purple);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
@@ -704,16 +704,17 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
         <h4>Atendimento</h4>
         <ul>
           <li><a href="tel:02141421987">(21) 4142-1987</a></li>
-          <li><a href="https://wa.me/552141421987">WhatsApp</a></li>
-          <li><a href="/">Sobre nós</a></li>
-          <li><a href="/">Sinistro</a></li>
+          <li><a href="https://wa.me/552141421987" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="mailto:contato@lunacorretora.com.br">contato@lunacorretora.com.br</a></li>
+          <li><a href="https://wa.me/552141421987?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20um%20sinistro" target="_blank" rel="noopener">Sinistro</a></li>
         </ul>
+        <p style="font-size:.72rem;color:rgba(255,255,255,.3);margin-top:10px">Seg-Sex 09:00–17:30 | Sáb 09:00–11:00</p>
       </div>
     </div>
     <div class="ftr-bot">
       <div><p>© 2025 Luna Seguros Corretora. Todos os direitos reservados.</p></div>
       <div class="ftr-bot-links">
-        <a href="#">Privacidade</a><a href="#">Termos de Uso</a>
+        <a href="/privacidade">Privacidade</a><a href="/termos">Termos</a>
       </div>
       <a href="https://www.reclameaqui.com.br/empresa/agil-administracao-consultoria-e-corretagem-de-seguros-ltda/" target="_blank" rel="noopener" class="ra-bot">
         <div class="ra-bot-logo">RA</div>
