@@ -3,7 +3,8 @@
 
 const AGENDOR_TOKEN = process.env.AGENDOR_TOKEN;
 const AGENDOR_BASE  = 'https://api.agendor.com.br/v3';
-const FUNNEL_STAGE  = process.env.FUNNEL_STAGE ? Number(process.env.FUNNEL_STAGE) : 3705348;
+const FUNNEL_STAGE            = process.env.FUNNEL_STAGE             ? Number(process.env.FUNNEL_STAGE)             : 3705348;
+const FUNNEL_STAGE_QUALIFICADO = process.env.FUNNEL_STAGE_QUALIFICADO ? Number(process.env.FUNNEL_STAGE_QUALIFICADO) : null;
 const WA_NUMBER     = process.env.WA_NUMBER || '552141421987';
 
 // ── helpers ──────────────────────────────────────────────────────────────────
@@ -75,11 +76,11 @@ async function createPerson(nome, fone, email, cpf, nasc) {
   return json.data;
 }
 
-async function createDeal(personId, title, description) {
+async function createDeal(personId, title, description, stageId) {
   const body = {
     title: title,
     funnelId: 876060,
-    dealStageId: FUNNEL_STAGE,
+    dealStageId: stageId || FUNNEL_STAGE,
     description: description,
   };
   const res  = await fetch(AGENDOR_BASE + '/people/' + personId + '/deals', {
@@ -276,10 +277,11 @@ module.exports = async function handler(req, res) {
     if (!person || !person.id) throw new Error('Falha ao obter ID do contato no Agendor');
 
     var isAbandono = (data.origem || '').toLowerCase().indexOf('abandono') >= 0;
+    var stageId = isAbandono ? FUNNEL_STAGE : (FUNNEL_STAGE_QUALIFICADO || FUNNEL_STAGE);
 
     var notes = buildNotes(data);
     var title = dealTitle(data);
-    var deal  = await createDeal(person.id, title, notes);
+    var deal  = await createDeal(person.id, title, notes, stageId);
 
     if (!deal || !deal.id) throw new Error('Falha ao criar negocio no Agendor');
 
