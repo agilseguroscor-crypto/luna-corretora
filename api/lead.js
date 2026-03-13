@@ -124,7 +124,7 @@ async function createDeal(personId, title, description, stageId) {
     body:    JSON.stringify(body),
   });
   const json = await res.json();
-  console.log('[lead] deal criado id:', json.data && json.data.id);
+  console.log('[lead] deal criado id:', json.data && json.data.id, 'stageId usado:', stageId, 'dealStageId na resposta:', json.data && json.data.dealStageId);
   return json.data;
 }
 
@@ -314,7 +314,11 @@ module.exports = async function handler(req, res) {
     var isAbandono = (data.origem || '').toLowerCase().indexOf('abandono') >= 0;
     var stageId = FUNNEL_STAGE;
     if (!isAbandono) {
-      stageId = (await getStageQualificadoId()) || FUNNEL_STAGE;
+      var qualId = await getStageQualificadoId();
+      // retry uma vez se falhou
+      if (!qualId) qualId = await getStageQualificadoId();
+      stageId = qualId || FUNNEL_STAGE;
+      console.log('[lead] stageId escolhido:', stageId, '| isAbandono:', isAbandono, '| qualId:', qualId);
     }
 
     var notes = buildNotes(data);
