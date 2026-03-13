@@ -3,8 +3,26 @@
 
 const AGENDOR_TOKEN = process.env.AGENDOR_TOKEN;
 const AGENDOR_BASE  = 'https://api.agendor.com.br/v3';
-const FUNNEL_STAGE            = process.env.FUNNEL_STAGE             ? Number(process.env.FUNNEL_STAGE)             : 3705348;
-const FUNNEL_STAGE_QUALIFICADO = process.env.FUNNEL_STAGE_QUALIFICADO ? Number(process.env.FUNNEL_STAGE_QUALIFICADO) : null;
+const FUNNEL_STAGE            = process.env.FUNNEL_STAGE ? Number(process.env.FUNNEL_STAGE) : 3705348;
+const FUNNEL_ID               = 876060;
+
+var _stageQualificadoId = null;
+
+async function getStageQualificadoId() {
+  if (_stageQualificadoId) return _stageQualificadoId;
+  try {
+    const res  = await fetch(AGENDOR_BASE + '/funnels/' + FUNNEL_ID + '/stages', { headers: agendorHeaders() });
+    const json = await res.json();
+    const stages = json.data || [];
+    const stage  = stages.find(function(s) {
+      return (s.name || '').toLowerCase().indexOf('qualifica') >= 0;
+    });
+    if (stage) _stageQualificadoId = stage.id;
+  } catch (e) {
+    console.error('[lead] erro ao buscar etapa qualificacao:', e.message);
+  }
+  return _stageQualificadoId;
+}
 const WA_NUMBER     = process.env.WA_NUMBER || '552141421987';
 
 // ── helpers ──────────────────────────────────────────────────────────────────
@@ -79,7 +97,7 @@ async function createPerson(nome, fone, email, cpf, nasc) {
 async function createDeal(personId, title, description, stageId) {
   const body = {
     title: title,
-    funnelId: 876060,
+    funnelId: FUNNEL_ID,
     dealStageId: stageId || FUNNEL_STAGE,
     description: description,
   };
@@ -277,7 +295,10 @@ module.exports = async function handler(req, res) {
     if (!person || !person.id) throw new Error('Falha ao obter ID do contato no Agendor');
 
     var isAbandono = (data.origem || '').toLowerCase().indexOf('abandono') >= 0;
-    var stageId = isAbandono ? FUNNEL_STAGE : (FUNNEL_STAGE_QUALIFICADO || FUNNEL_STAGE);
+    var stageId = FUNNEL_STAGE;
+    if (!isAbandono) {
+      stageId = (await getStageQualificadoId()) || FUNNEL_STAGE;
+    }
 
     var notes = buildNotes(data);
     var title = dealTitle(data);
