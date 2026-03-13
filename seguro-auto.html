@@ -1355,4 +1355,12 @@ function toggleChat(){
   if(chatOpen&&!iframeLoaded){const iframe=document.getElementById('chat-iframe');iframe.src=iframe.dataset.src;iframeLoaded=true;}
 }
 
-// ── POPULAR ANOS ─────────────────────────�
+// ── POPULAR ANOS 
+(function(){
+  const s=document.getElementById('s-ano');if(!s)return;
+  const curr=new Date().getFullYear();
+  for(let y=curr+1;y>=1990;y--){const o=document.createElement('option');o.value=o.textContent=y;s.appendChild(o);}
+})();
+</script>
+</body>
+</html>

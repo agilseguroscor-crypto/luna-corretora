@@ -942,4 +942,18 @@ function toggleChat(){
   const closeIco=document.getElementById('chat-close-ico');
   const arrow=document.getElementById('cb-arrow');
   win.classList.toggle('open',chatOpen);
-  ico.style.display=chatOpen?'none':'inl
+  ico.style.display=chatOpen?'none':'inline';
+  closeIco.style.display=chatOpen?'inline':'none';
+  arrow.textContent=chatOpen?'↓':'↑';
+  if(chatOpen&&!iframeLoaded){const iframe=document.getElementById('chat-iframe');iframe.src=iframe.dataset.src;iframeLoaded=true;}
+}
+// ── FAQ ───────────────────────────────────────
+function faq(btn){
+  const a=btn.nextElementSibling,o=a.classList.contains('on');
+  document.querySelectorAll('.faq-a').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.faq-q').forEach(x=>x.classList.remove('on'));
+  if(!o){a.classList.add('on');btn.classList.add('on')}
+}
+</script>
+</body>
+</html>
