@@ -928,6 +928,7 @@ function setProgress(step){
   }
 }
 
+var _leadEnviado=false,_passoStep2=false;
 function salvarAbandono(produto,origem){
   const nome=document.getElementById('f-nome')?.value.trim()||'';
   const fone=document.getElementById('f-fone')?.value.trim()||'';
@@ -935,7 +936,7 @@ function salvarAbandono(produto,origem){
   const nasc=document.getElementById('f-nasc')?.value.trim()||'';
   const cpf=document.getElementById('f-cpf')?.value.trim()||'';
   if(!nome||fone.replace(/\D/g,'').length<10)return;
-  fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({produto,nome,fone,email,nasc,cpf,origem})}).catch(()=>{});
+  fetch('/api/lead',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({produto,nome,fone,email,nasc,cpf,origem})}).catch(()=>{});
 }
 function irStep2(){
   const nome=document.getElementById('f-nome').value.trim();
@@ -946,7 +947,7 @@ function irStep2(){
   fldFone.classList.toggle('has-err',fone.length<10);
   fldNasc.classList.toggle('has-err',nasc.length<8);
   if(nome.length<3||fone.length<10||nasc.length<8)return;
-  salvarAbandono('Seguro Caminhão','Site - Abandono Seguro Caminhão');
+  _passoStep2=true;
   document.getElementById('step-1').style.display='none';
   document.getElementById('step-2').style.display='block';
   setProgress(2);
@@ -976,6 +977,7 @@ function toggleGaragem(){
 }
 
 async function enviarLead(){
+  _leadEnviado=true;
   const nome  = document.getElementById('f-nome').value.trim();
   const fone  = document.getElementById('f-fone').value.trim();
   const email = document.getElementById('f-email').value.trim();
@@ -1114,6 +1116,12 @@ function faq(btn){
   const s=document.getElementById('s-ano');if(!s)return;
   const curr=new Date().getFullYear();
   for(let y=curr+1;y>=1990;y--){const o=document.createElement('option');o.value=o.textContent=y;s.appendChild(o);}
+})();
+// ── ABANDONO (só dispara se saiu sem enviar) ─────────────────────
+(function(){
+  function _onLeave(){if(_passoStep2&&!_leadEnviado)salvarAbandono('Seguro Caminhão','Site - Abandono Seguro Caminhão');}
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')_onLeave();});
+  window.addEventListener('pagehide',_onLeave);
 })();
 </script>
 </body>

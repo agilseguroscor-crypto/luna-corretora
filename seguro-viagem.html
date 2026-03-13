@@ -672,6 +672,7 @@ function setProgress(step){
     if(ln)ln.classList.toggle('done',i<step);
   }
 }
+var _leadEnviado=false,_passoStep2=false;
 function salvarAbandono(produto,origem){
   const nome=document.getElementById('f-nome')?.value.trim()||'';
   const fone=document.getElementById('f-fone')?.value.trim()||'';
@@ -679,20 +680,21 @@ function salvarAbandono(produto,origem){
   const nasc=document.getElementById('f-nasc')?.value.trim()||'';
   const cpf=document.getElementById('f-cpf')?.value.trim()||'';
   if(!nome||fone.replace(/\D/g,'').length<10)return;
-  fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({produto,nome,fone,email,nasc,cpf,origem})}).catch(()=>{});
+  fetch('/api/lead',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({produto,nome,fone,email,nasc,cpf,origem})}).catch(()=>{});
 }
 function irStep2(){
   const nome=document.getElementById('f-nome').value.trim();const fone=document.getElementById('f-fone').value.replace(/\D/g,'');const nasc=document.getElementById('f-nasc').value.trim();
   const fldNome=document.getElementById('fld-nome'),fldFone=document.getElementById('fld-fone'),fldNasc=document.getElementById('fld-nasc');
   fldNome.classList.toggle('has-err',nome.length<3);fldFone.classList.toggle('has-err',fone.length<10);fldNasc.classList.toggle('has-err',nasc.length<8);
   if(nome.length<3||fone.length<10||nasc.length<8)return;
-  salvarAbandono('Seguro Viagem','Site - Abandono Seguro Viagem');
+  _passoStep2=true;
   document.getElementById('step-1').style.display='none';document.getElementById('step-2').style.display='block';setProgress(2);
   document.getElementById('formulario').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function voltarStep1(){document.getElementById('step-2').style.display='none';document.getElementById('step-1').style.display='block';setProgress(1);}
 
 async function enviarLead(){
+  _leadEnviado=true;
   const nome=document.getElementById('f-nome').value.trim();const fone=document.getElementById('f-fone').value.trim();
   const email=document.getElementById('f-email').value.trim();const cpf=document.getElementById('f-cpf').value.trim();
   const nasc=document.getElementById('f-nasc').value.trim();
@@ -743,6 +745,12 @@ function faq(btn){
   document.querySelectorAll('.faq-q').forEach(x=>x.classList.remove('on'));
   if(!o){a.classList.add('on');btn.classList.add('on')}
 }
+// ── ABANDONO (só dispara se saiu sem enviar) ─────────────────────
+(function(){
+  function _onLeave(){if(_passoStep2&&!_leadEnviado)salvarAbandono('Seguro Viagem','Site - Abandono Seguro Viagem');}
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')_onLeave();});
+  window.addEventListener('pagehide',_onLeave);
+})();
 </script>
 </body>
 </html>
