@@ -15,8 +15,7 @@ async function getStageQualificadoId() {
 
   // Agendor v3 — tenta os dois formatos de endpoint possíveis
   const endpoints = [
-    AGENDOR_BASE + '/funnels/' + FUNNEL_ID + '/deal-stages',
-    AGENDOR_BASE + '/deal-stages?funnel_id=' + FUNNEL_ID,
+    AGENDOR_BASE + '/deal_stages?funnel=' + FUNNEL_ID,
   ];
 
   for (var i = 0; i < endpoints.length; i++) {

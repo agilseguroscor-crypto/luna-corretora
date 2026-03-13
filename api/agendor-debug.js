@@ -9,11 +9,8 @@ module.exports = async function handler(req, res) {
   const FUNNEL_ID = 876060;
 
   const endpoints = [
+    '/deal_stages?funnel=' + FUNNEL_ID,
     '/funnels',
-    '/funnels/' + FUNNEL_ID,
-    '/funnels/' + FUNNEL_ID + '/deal-stages',
-    '/deal-stages',
-    '/deal-stages?funnel_id=' + FUNNEL_ID,
   ];
 
   const results = {};
