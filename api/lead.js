@@ -3,21 +3,30 @@
 
 const AGENDOR_TOKEN = process.env.AGENDOR_TOKEN;
 const AGENDOR_BASE  = 'https://api.agendor.com.br/v3';
-const FUNNEL_STAGE            = process.env.FUNNEL_STAGE ? Number(process.env.FUNNEL_STAGE) : 3705348;
-const FUNNEL_ID               = 876060;
+const FUNNEL_STAGE             = process.env.FUNNEL_STAGE              ? Number(process.env.FUNNEL_STAGE)              : 3705348;
+const FUNNEL_STAGE_QUALIFICADO = process.env.FUNNEL_STAGE_QUALIFICADO  ? Number(process.env.FUNNEL_STAGE_QUALIFICADO)  : null;
+const FUNNEL_ID                = 876060;
 
 var _stageQualificadoId = null;
 
 async function getStageQualificadoId() {
+  if (FUNNEL_STAGE_QUALIFICADO) return FUNNEL_STAGE_QUALIFICADO;
   if (_stageQualificadoId) return _stageQualificadoId;
   try {
-    const res  = await fetch(AGENDOR_BASE + '/funnels/' + FUNNEL_ID + '/stages', { headers: agendorHeaders() });
+    // tenta endpoint v3 de deal-stages filtrado por funil
+    const res  = await fetch(AGENDOR_BASE + '/deal-stages?funnel_id=' + FUNNEL_ID, { headers: agendorHeaders() });
     const json = await res.json();
+    console.log('[lead] deal-stages response:', JSON.stringify(json).slice(0, 300));
     const stages = json.data || [];
     const stage  = stages.find(function(s) {
       return (s.name || '').toLowerCase().indexOf('qualifica') >= 0;
     });
-    if (stage) _stageQualificadoId = stage.id;
+    if (stage) {
+      _stageQualificadoId = stage.id;
+      console.log('[lead] etapa qualificacao encontrada:', stage.id, stage.name);
+    } else {
+      console.warn('[lead] etapa qualificacao NAO encontrada. Etapas disponiveis:', stages.map(function(s){ return s.name; }).join(', '));
+    }
   } catch (e) {
     console.error('[lead] erro ao buscar etapa qualificacao:', e.message);
   }
