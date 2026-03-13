@@ -240,8 +240,8 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
   .cov-grid{grid-template-columns:1fr 1fr}
   .ftr-grid{grid-template-columns:1fr}
   .cta-btns{flex-direction:column;align-items:center}
-  .chat-widget{bottom:16px;right:12px}.chat-window{width:calc(100vw - 24px)}.chat-bubble-btn{padding:9px 14px 9px 9px}
-  .btn-nav-wa{padding:7px 10px;font-size:.72rem;gap:5px}.btn-nav{padding:7px 10px;font-size:.72rem}.nav-right{gap:5px}
+  .chat-widget{bottom:16px;right:8px}.chat-window{width:calc(100vw - 24px)}.chat-bubble-btn{padding:9px 14px 9px 9px}
+  .btn-nav-wa{padding:6px 8px;font-size:.68rem;gap:4px}.btn-nav{padding:6px 8px;font-size:.68rem}.nav-right{gap:4px}.logo{margin-right:4px}
 }
 .ins-logos{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:16px}
 .ins-card{display:flex;align-items:center;justify-content:center;height:64px;padding:0 24px;background:#fff;border:1.5px solid #e5e7eb;border-top:4px solid var(--purple);border-radius:10px;font-family:var(--fh);font-size:.85rem;font-weight:800;color:#374151;min-width:110px;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.06)}
@@ -704,6 +704,7 @@ a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-h
           <li><a href="/plano-saude">Plano de Saúde</a></li>
           <li><a href="/consorcio">Consórcio</a></li>
           <li><a href="/blog">Blog</a></li>
+          <li><a href="/sobre">Sobre nós</a></li>
         </ul>
       </div>
       <div class="ftr-col">
@@ -711,7 +712,7 @@ a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-h
         <ul>
           <li><a href="tel:02141421987">(21) 4142-1987</a></li>
           <li><a href="https://wa.me/552141421987" target="_blank" rel="noopener">WhatsApp</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#7e1d11100a1f0a113e120b101f1d110c0c1b0a110c1f501d1113501c0c"><span class="__cf_email__" data-cfemail="e88b87869c899c87a8849d86898b879a9a8d9c879a89c68b8785c68a9a">[email&#160;protected]</span></a></li>
+          <li><a href="mailto:contato@lunaseguros.com.br"><!--email_off-->contato@lunaseguros.com.br<!--/email_off--></a></li>
           <li><a href="https://wa.me/552141421987?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20um%20sinistro" target="_blank" rel="noopener">Sinistro</a></li>
         </ul>
         <p style="font-size:.72rem;color:rgba(255,255,255,.3);margin-top:10px">Seg-Sex 09:00–17:30<br/>Sáb 09:00–11:00</p>
@@ -752,7 +753,7 @@ a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-h
   </button>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 let _planoTipo='Individual';
 let _temPlano=false,_reembolso=false,_isOdonto=false,_mais1ano=true;
 
@@ -828,6 +829,7 @@ function setProgress(step){
   }
 }
 
+var _leadEnviado=false,_passoStep2=false;
 function salvarAbandono(produto,origem){
   const nome=document.getElementById('f-nome')?.value.trim()||'';
   const fone=document.getElementById('f-fone')?.value.trim()||'';
@@ -835,7 +837,7 @@ function salvarAbandono(produto,origem){
   const nasc=document.getElementById('f-nasc')?.value.trim()||'';
   const cpf=document.getElementById('f-cpf')?.value.trim()||'';
   if(!nome||fone.replace(/\D/g,'').length<10)return;
-  fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({produto,nome,fone,email,nasc,cpf,origem})}).catch(()=>{});
+  fetch('/api/lead',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({produto,nome,fone,email,nasc,cpf,origem})}).catch(()=>{});
 }
 function irStep2(){
   const nome=document.getElementById('f-nome').value.trim();
@@ -846,7 +848,7 @@ function irStep2(){
   fldFone.classList.toggle('has-err',fone.length<10);
   fldNasc.classList.toggle('has-err',nasc.length<8);
   if(nome.length<3||fone.length<10||nasc.length<8)return;
-  salvarAbandono('Plano de Saúde','Site - Abandono Plano de Saúde');
+  _passoStep2=true;
   document.getElementById('step-1').style.display='none';
   document.getElementById('step-2').style.display='block';
   setProgress(2);
@@ -859,6 +861,7 @@ function voltarStep1(){
 }
 
 async function enviarLead(){
+  _leadEnviado=true;
   const nome  = document.getElementById('f-nome').value.trim();
   const fone  = document.getElementById('f-fone').value.trim();
   const email = document.getElementById('f-email').value.trim();
@@ -941,4 +944,24 @@ function toggleChat(){
   const closeIco=document.getElementById('chat-close-ico');
   const arrow=document.getElementById('cb-arrow');
   win.classList.toggle('open',chatOpen);
-  ico.style.display=chatOpen?'none':'inl
+  ico.style.display=chatOpen?'none':'inline';
+  closeIco.style.display=chatOpen?'inline':'none';
+  arrow.textContent=chatOpen?'↓':'↑';
+  if(chatOpen&&!iframeLoaded){const iframe=document.getElementById('chat-iframe');iframe.src=iframe.dataset.src;iframeLoaded=true;}
+}
+// ── FAQ ───────────────────────────────────────
+function faq(btn){
+  const a=btn.nextElementSibling,o=a.classList.contains('on');
+  document.querySelectorAll('.faq-a').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.faq-q').forEach(x=>x.classList.remove('on'));
+  if(!o){a.classList.add('on');btn.classList.add('on')}
+}
+// ── ABANDONO (só dispara se saiu sem enviar) ─────────────────────
+(function(){
+  function _onLeave(){if(_passoStep2&&!_leadEnviado)salvarAbandono('Plano de Saúde','Site - Abandono Plano de Saúde');}
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')_onLeave();});
+  window.addEventListener('pagehide',_onLeave);
+})();
+</script>
+</body>
+</html>

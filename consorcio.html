@@ -13,14 +13,14 @@
 <meta property="og:url" content="https://lunaseguros.com.br/consorcio"/>
 <meta property="og:title" content="Consórcio Rio de Janeiro | Luna Seguros — Sem Juros"/>
 <meta property="og:description" content="Consórcio sem juros para automóvel, imóvel, moto e caminhão. Cotação grátis, atendimento humano."/>
-<meta property="og:image" content="https://lunaseguros.com.br/api/og?title=Cons%C3%B3rcio<meta property="og:image" content="https://lunaseguros.com.br/api/og?title=Cons%C3%B3rcio&amp;desc=Simule%20seu%20cons%C3%B3rcio&amp;emoji=%F0%9F%A4%9D"/>amp;desc=Simule%20seu%20cons%C3%B3rcio<meta property="og:image" content="https://lunaseguros.com.br/api/og?title=Cons%C3%B3rcio&amp;desc=Simule%20seu%20cons%C3%B3rcio&amp;emoji=%F0%9F%A4%9D"/>amp;emoji=%F0%9F%A4%9D"/>
+<meta property="og:image" content="https://lunaseguros.com.br/api/og?title=Cons%C3%B3rcio&amp;desc=Simule%20seu%20cons%C3%B3rcio&amp;emoji=%F0%9F%A4%9D"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta property="og:locale" content="pt_BR"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Consórcio Rio de Janeiro | Luna Seguros"/>
 <meta name="twitter:description" content="Consórcio sem juros no Rio de Janeiro. Automóvel, imóvel, moto e caminhão."/>
-<meta name="twitter:image" content="https://lunaseguros.com.br/api/og?title=Cons%C3%B3rcio<meta name="twitter:description" content="Consórcio sem juros no Rio de Janeiro. Automóvel, imóvel, moto e caminhão."/>amp;desc=Simule%20seu%20cons%C3%B3rcio<meta name="twitter:description" content="Consórcio sem juros no Rio de Janeiro. Automóvel, imóvel, moto e caminhão."/>amp;emoji=%F0%9F%A4%9D"/>
+<meta name="twitter:image" content="https://lunaseguros.com.br/api/og?title=Cons%C3%B3rcio&amp;desc=Simule%20seu%20cons%C3%B3rcio&amp;emoji=%F0%9F%A4%9D"/>
 
 <!-- Google Ads tag — substitua pelo ID real -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
@@ -229,8 +229,8 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
   .fields-row{grid-template-columns:1fr}
   .ftr-grid{grid-template-columns:1fr}
   .cta-btns{flex-direction:column;align-items:center}
-  .chat-widget{bottom:16px;right:12px}.chat-window{width:calc(100vw - 24px)}.chat-bubble-btn{padding:9px 14px 9px 9px}
-  .btn-nav-wa{padding:7px 10px;font-size:.72rem;gap:5px}.btn-nav{padding:7px 10px;font-size:.72rem}.nav-right{gap:5px}
+  .chat-widget{bottom:16px;right:8px}.chat-window{width:calc(100vw - 24px)}.chat-bubble-btn{padding:9px 14px 9px 9px}
+  .btn-nav-wa{padding:6px 8px;font-size:.68rem;gap:4px}.btn-nav{padding:6px 8px;font-size:.68rem}.nav-right{gap:4px}.logo{margin-right:4px}
 }
 .ins-logos{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:16px}
 .ins-card{display:flex;align-items:center;justify-content:center;height:64px;padding:0 24px;background:#fff;border:1.5px solid #e5e7eb;border-top:4px solid var(--purple);border-radius:10px;font-family:var(--fh);font-size:.85rem;font-weight:800;color:#374151;min-width:110px;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.06)}
@@ -586,6 +586,7 @@ a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-h
           <li><a href="/plano-saude">Plano de Saúde</a></li>
           <li><a href="/consorcio">Consórcio</a></li>
           <li><a href="/blog">Blog</a></li>
+          <li><a href="/sobre">Sobre nós</a></li>
         </ul>
       </div>
       <div class="ftr-col">
@@ -651,6 +652,7 @@ function setProgress(step){
     if(ln)ln.classList.toggle('done',i<step);
   }
 }
+var _leadEnviado=false,_passoStep2=false;
 function salvarAbandono(produto,origem){
   const nome=document.getElementById('f-nome')?.value.trim()||'';
   const fone=document.getElementById('f-fone')?.value.trim()||'';
@@ -658,20 +660,21 @@ function salvarAbandono(produto,origem){
   const nasc=document.getElementById('f-nasc')?.value.trim()||'';
   const cpf=document.getElementById('f-cpf')?.value.trim()||'';
   if(!nome||fone.replace(/\D/g,'').length<10)return;
-  fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({produto,nome,fone,email,nasc,cpf,origem})}).catch(()=>{});
+  fetch('/api/lead',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({produto,nome,fone,email,nasc,cpf,origem})}).catch(()=>{});
 }
 function irStep2(){
   const nome=document.getElementById('f-nome').value.trim();const fone=document.getElementById('f-fone').value.replace(/\D/g,'');const nasc=document.getElementById('f-nasc').value.trim();
   const fldNome=document.getElementById('fld-nome'),fldFone=document.getElementById('fld-fone'),fldNasc=document.getElementById('fld-nasc');
   fldNome.classList.toggle('has-err',nome.length<3);fldFone.classList.toggle('has-err',fone.length<10);fldNasc.classList.toggle('has-err',nasc.length<8);
   if(nome.length<3||fone.length<10||nasc.length<8)return;
-  salvarAbandono('Consórcio','Site - Abandono Consórcio');
+  _passoStep2=true;
   document.getElementById('step-1').style.display='none';document.getElementById('step-2').style.display='block';setProgress(2);
   document.getElementById('formulario').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function voltarStep1(){document.getElementById('step-2').style.display='none';document.getElementById('step-1').style.display='block';setProgress(1);}
 
 async function enviarLead(){
+  _leadEnviado=true;
   const nome=document.getElementById('f-nome').value.trim();const fone=document.getElementById('f-fone').value.trim();
   const email=document.getElementById('f-email').value.trim();const cpf=document.getElementById('f-cpf').value.trim();
   const nasc=document.getElementById('f-nasc').value.trim();
@@ -702,6 +705,12 @@ function faq(btn){const a=btn.nextElementSibling,o=a.classList.contains('on');do
 
 let chatOpen=false,iframeLoaded=false;
 function toggleChat(){chatOpen=!chatOpen;const win=document.getElementById('chat-window');const ico=document.getElementById('chat-ico');const closeIco=document.getElementById('chat-close-ico');const arrow=document.getElementById('cb-arrow');win.classList.toggle('open',chatOpen);ico.style.display=chatOpen?'none':'inline';closeIco.style.display=chatOpen?'inline':'none';arrow.textContent=chatOpen?'↓':'↑';if(chatOpen&&!iframeLoaded){const iframe=document.getElementById('chat-iframe');iframe.src=iframe.dataset.src;iframeLoaded=true;}}
+// ── ABANDONO (só dispara se saiu sem enviar) ─────────────────────
+(function(){
+  function _onLeave(){if(_passoStep2&&!_leadEnviado)salvarAbandono('Consórcio','Site - Abandono Consórcio');}
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')_onLeave();});
+  window.addEventListener('pagehide',_onLeave);
+})();
 </script>
 </body>
 </html>

@@ -205,8 +205,10 @@ function buildNotes(data) {
 }
 
 function dealTitle(data) {
+  const isAbandono = (data.origem || '').toLowerCase().indexOf('abandono') >= 0;
+  const prefix = isAbandono ? 'ABANDONO — ' : '';
   const now = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', day:'2-digit', month:'2-digit', year:'2-digit', hour:'2-digit', minute:'2-digit' });
-  return (data.produto || 'Lead') + ' - ' + data.nome + ' (' + now + ')';
+  return prefix + (data.produto || 'Lead') + ' - ' + data.nome + ' (' + now + ')';
 }
 
 // ── handler ──────────────────────────────────────────────────────────────────
@@ -273,11 +275,7 @@ module.exports = async function handler(req, res) {
 
     if (!person || !person.id) throw new Error('Falha ao obter ID do contato no Agendor');
 
-    // Abandono: só salva o contato, sem criar negócio
     var isAbandono = (data.origem || '').toLowerCase().indexOf('abandono') >= 0;
-    if (isAbandono) {
-      return res.status(200).json({ ok: true, isNew: isNew, personId: person.id, abandono: true });
-    }
 
     var notes = buildNotes(data);
     var title = dealTitle(data);
