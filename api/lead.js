@@ -12,25 +12,34 @@ var _stageQualificadoId = null;
 async function getStageQualificadoId() {
   if (FUNNEL_STAGE_QUALIFICADO) return FUNNEL_STAGE_QUALIFICADO;
   if (_stageQualificadoId) return _stageQualificadoId;
-  try {
-    // tenta endpoint v3 de deal-stages filtrado por funil
-    const res  = await fetch(AGENDOR_BASE + '/deal-stages?funnel_id=' + FUNNEL_ID, { headers: agendorHeaders() });
-    const json = await res.json();
-    console.log('[lead] deal-stages response:', JSON.stringify(json).slice(0, 300));
-    const stages = json.data || [];
-    const stage  = stages.find(function(s) {
-      return (s.name || '').toLowerCase().indexOf('qualifica') >= 0;
-    });
-    if (stage) {
-      _stageQualificadoId = stage.id;
-      console.log('[lead] etapa qualificacao encontrada:', stage.id, stage.name);
-    } else {
-      console.warn('[lead] etapa qualificacao NAO encontrada. Etapas disponiveis:', stages.map(function(s){ return s.name; }).join(', '));
+
+  // Agendor v3 — tenta os dois formatos de endpoint possíveis
+  const endpoints = [
+    AGENDOR_BASE + '/funnels/' + FUNNEL_ID + '/deal-stages',
+    AGENDOR_BASE + '/deal-stages?funnel_id=' + FUNNEL_ID,
+  ];
+
+  for (var i = 0; i < endpoints.length; i++) {
+    try {
+      const res  = await fetch(endpoints[i], { headers: agendorHeaders() });
+      const json = await res.json();
+      const stages = json.data || [];
+      console.log('[lead] endpoint', endpoints[i], '→', stages.length, 'etapas:', stages.map(function(s){ return s.name + '(' + s.id + ')'; }).join(', '));
+      const stage = stages.find(function(s) {
+        return (s.name || '').toLowerCase().indexOf('qualifica') >= 0;
+      });
+      if (stage) {
+        _stageQualificadoId = stage.id;
+        console.log('[lead] etapa qualificacao encontrada:', stage.id, stage.name);
+        return _stageQualificadoId;
+      }
+    } catch (e) {
+      console.error('[lead] erro no endpoint', endpoints[i], ':', e.message);
     }
-  } catch (e) {
-    console.error('[lead] erro ao buscar etapa qualificacao:', e.message);
   }
-  return _stageQualificadoId;
+
+  console.error('[lead] etapa "Qualificacao de Lead" nao encontrada em nenhum endpoint');
+  return null;
 }
 const WA_NUMBER     = process.env.WA_NUMBER || '552141421987';
 
