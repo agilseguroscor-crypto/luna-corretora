@@ -3,7 +3,43 @@
 
 const AGENDOR_TOKEN = process.env.AGENDOR_TOKEN;
 const AGENDOR_BASE  = 'https://api.agendor.com.br/v3';
-const FUNNEL_STAGE  = process.env.FUNNEL_STAGE ? Number(process.env.FUNNEL_STAGE) : 3705348;
+const FUNNEL_STAGE             = process.env.FUNNEL_STAGE              ? Number(process.env.FUNNEL_STAGE)              : 3705348;
+const FUNNEL_STAGE_QUALIFICADO = process.env.FUNNEL_STAGE_QUALIFICADO  ? Number(process.env.FUNNEL_STAGE_QUALIFICADO)  : null;
+const FUNNEL_ID                = 876060;
+
+var _stageQualificadoId = null;
+
+async function getStageQualificadoId() {
+  if (FUNNEL_STAGE_QUALIFICADO) return FUNNEL_STAGE_QUALIFICADO;
+  if (_stageQualificadoId) return _stageQualificadoId;
+
+  // Agendor v3 — tenta os dois formatos de endpoint possíveis
+  const endpoints = [
+    AGENDOR_BASE + '/deal_stages?funnel=' + FUNNEL_ID,
+  ];
+
+  for (var i = 0; i < endpoints.length; i++) {
+    try {
+      const res  = await fetch(endpoints[i], { headers: agendorHeaders() });
+      const json = await res.json();
+      const stages = json.data || [];
+      console.log('[lead] endpoint', endpoints[i], '→', stages.length, 'etapas:', stages.map(function(s){ return s.name + '(' + s.id + ')'; }).join(', '));
+      const stage = stages.find(function(s) {
+        return (s.name || '').toLowerCase().indexOf('qualifica') >= 0;
+      });
+      if (stage) {
+        _stageQualificadoId = stage.id;
+        console.log('[lead] etapa qualificacao encontrada:', stage.id, stage.name);
+        return _stageQualificadoId;
+      }
+    } catch (e) {
+      console.error('[lead] erro no endpoint', endpoints[i], ':', e.message);
+    }
+  }
+
+  console.error('[lead] etapa "Qualificacao de Lead" nao encontrada em nenhum endpoint');
+  return null;
+}
 const WA_NUMBER     = process.env.WA_NUMBER || '552141421987';
 
 // ── helpers ──────────────────────────────────────────────────────────────────
@@ -75,11 +111,11 @@ async function createPerson(nome, fone, email, cpf, nasc) {
   return json.data;
 }
 
-async function createDeal(personId, title, description) {
+async function createDeal(personId, title, description, stageId) {
   const body = {
     title: title,
-    funnelId: 876060,
-    dealStageId: FUNNEL_STAGE,
+    funnelId: FUNNEL_ID,
+    dealStageId: stageId || FUNNEL_STAGE,
     description: description,
   };
   const res  = await fetch(AGENDOR_BASE + '/people/' + personId + '/deals', {
@@ -88,7 +124,7 @@ async function createDeal(personId, title, description) {
     body:    JSON.stringify(body),
   });
   const json = await res.json();
-  console.log('[lead] deal criado id:', json.data && json.data.id);
+  console.log('[lead] deal criado id:', json.data && json.data.id, 'stageId usado:', stageId, 'dealStageId na resposta:', json.data && json.data.dealStageId);
   return json.data;
 }
 
@@ -276,10 +312,18 @@ module.exports = async function handler(req, res) {
     if (!person || !person.id) throw new Error('Falha ao obter ID do contato no Agendor');
 
     var isAbandono = (data.origem || '').toLowerCase().indexOf('abandono') >= 0;
+    var stageId = FUNNEL_STAGE;
+    if (!isAbandono) {
+      var qualId = await getStageQualificadoId();
+      // retry uma vez se falhou
+      if (!qualId) qualId = await getStageQualificadoId();
+      stageId = qualId || FUNNEL_STAGE;
+      console.log('[lead] stageId escolhido:', stageId, '| isAbandono:', isAbandono, '| qualId:', qualId);
+    }
 
     var notes = buildNotes(data);
     var title = dealTitle(data);
-    var deal  = await createDeal(person.id, title, notes);
+    var deal  = await createDeal(person.id, title, notes, stageId);
 
     if (!deal || !deal.id) throw new Error('Falha ao criar negocio no Agendor');
 
