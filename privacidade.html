@@ -51,26 +51,24 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 @media(max-width:768px){.ftr-grid{grid-template-columns:1fr;gap:28px}}
 a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-highlight-color:rgba(123,11,154,.15)}@media(hover:none)and(pointer:coarse){.prod-card:hover,.btn-big-purple:hover,.btn-big-wa:hover,.btn-hero:hover,.btn-cotar:hover,.btn-nav:hover,.btn-nav-wa:hover,.chat-bubble-btn:hover,.blog-card:hover,.ins-card:hover,.benefit-card:hover,.faq-item:hover,.btn-cta-w:hover,.btn-cta-o:hover,.btn-purple:hover,.btn-outline:hover,.btn-outline-purple:hover,.radio-opt:hover,.ftr-soc a:hover,.ra-badge:hover,.faq-q:hover{transform:none!important;box-shadow:none!important}}
 
-/* MOBILE BOTTOM NAV */
+/* MOBILE BOTTOM NAV - FIXED */
 .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:#7b0b9a;color:#fff;padding:12px 24px;border-radius:0 0 8px 8px;font-size:.85rem;font-weight:700;z-index:10000;transition:top .2s}
 .skip-link:focus{top:0}
 :focus-visible{outline:3px solid #c97fe0;outline-offset:2px;border-radius:4px}
 :focus:not(:focus-visible){outline:none}
-.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:9998;background:#fff;border-top:1px solid #e0e0e0;padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px));box-shadow:0 -2px 16px rgba(0,0,0,.08)}
-.bottom-nav-inner{display:grid;grid-template-columns:repeat(4,1fr);max-width:480px;margin:0 auto}
-.bnav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px;text-decoration:none;color:#6b7280;font-size:.62rem;font-weight:600;letter-spacing:.02em;transition:color .15s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;position:relative;background:none;border:none;cursor:pointer}
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:9998;background:#fff;border-top:1px solid #e0e0e0;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));box-shadow:0 -2px 16px rgba(0,0,0,.08)}
+.bottom-nav-inner{display:grid;grid-template-columns:repeat(4,1fr);width:100%;max-width:100%;padding:0 8px;box-sizing:border-box}
+.bnav-item{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;padding:4px 2px;text-decoration:none;color:#6b7280;font-size:.65rem;font-weight:600;letter-spacing:.01em;transition:color .15s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;position:relative;min-height:48px;overflow:visible;background:none;border:none;cursor:pointer}
 .bnav-item.active{color:#7b0b9a}
 .bnav-item svg{width:22px;height:22px;flex-shrink:0}
-.bnav-item--cta{color:#fff!important}
-.bnav-item--cta .bnav-ico{background:#7b0b9a;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:-18px;box-shadow:0 4px 12px rgba(123,11,154,.35)}
-.bnav-item--cta .bnav-ico svg{width:20px;height:20px;color:#fff}
+.bnav-item--cta{color:#7b0b9a!important;justify-content:flex-end}
+.bnav-item--cta .bnav-ico{background:#7b0b9a;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(123,11,154,.35)}
+.bnav-item--cta .bnav-ico svg{width:18px;height:18px;color:#fff}
 .bnav-item--cta span:last-child{color:#7b0b9a;font-weight:700}
 .bnav-item--wa{color:#16A34A!important}
 .bnav-item--wa svg{color:#16A34A}
-@media(max-width:900px){.bottom-nav{display:block}body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}}
-@media(max-width:600px){.chat-widget{bottom:calc(72px + env(safe-area-inset-bottom,0px))!important}}
+@media(max-width:900px){.bottom-nav{display:block}body{padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}.chat-widget{bottom:calc(76px + env(safe-area-inset-bottom,0px))!important;right:16px!important}.chat-bubble-btn{padding:8px 14px 8px 8px}.cb-title{font-size:.78rem}.cb-sub{font-size:.64rem}}
 @media(pointer:coarse){.faq-q{min-height:52px}}
-/* Hamburger (Luna doesn't have one yet, add basic) */
 .hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:301}
 .hamburger span{display:block;width:22px;height:2px;background:#fff;margin:5px 0;border-radius:2px;transition:all .3s}
 .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
