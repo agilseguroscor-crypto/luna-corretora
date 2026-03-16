@@ -1,0 +1,26 @@
+{
+  "name": "Luna Seguros Corretora",
+  "short_name": "Luna Seguros",
+  "description": "Corretora de seguros e planos de saúde na Barra da Tijuca, Rio de Janeiro. Cotação gratuita.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#7b0b9a",
+  "lang": "pt-BR",
+  "orientation": "portrait-primary",
+  "categories": ["business", "finance"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
