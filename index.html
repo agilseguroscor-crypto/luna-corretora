@@ -65,10 +65,23 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;fo
 .trust-item{display:flex;align-items:center;gap:8px;font-size:.85rem;color:rgba(255,255,255,.55)}
 .trust-dot{width:7px;height:7px;background:var(--green);border-radius:50%;flex-shrink:0}
 .hero-cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero-microcopy{margin-top:14px;font-size:.83rem;color:rgba(255,255,255,.58)}
+.hero-microcopy strong{color:#fff}
 .btn-big-purple{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--purple);color:#fff;font-family:var(--fh);font-size:1.05rem;font-weight:800;border-radius:10px;border:none;cursor:pointer;transition:all .2s;text-decoration:none;box-shadow:0 4px 20px rgba(123,11,154,.4)}
 .btn-big-purple:hover{background:var(--purple-d);transform:translateY(-2px)}
 .btn-big-wa{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:#1aad4b;color:#fff;font-family:var(--fh);font-size:1.05rem;font-weight:800;border-radius:10px;transition:all .2s;text-decoration:none}
 .btn-big-wa:hover{background:#158f3e;transform:translateY(-2px)}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+.step-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:22px;display:flex;gap:12px;align-items:flex-start}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--purple-l);color:var(--purple);font-family:var(--fh);font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-card h3{font-family:var(--fh);font-size:1rem;color:var(--grafite);margin-bottom:4px}
+.step-card p{font-size:.88rem;color:var(--muted);line-height:1.6}
+.lead-quick-wrap{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:24px;max-width:780px;margin:0 auto}
+.lead-quick-form{display:grid;grid-template-columns:1.2fr 1.2fr 1fr auto;gap:10px;margin-top:14px}
+.lead-quick-form input,.lead-quick-form select{height:46px;border:1.5px solid var(--border);border-radius:10px;padding:0 12px;font:inherit;color:var(--grafite);background:#fff}
+.lead-quick-form input:focus,.lead-quick-form select:focus{border-color:#c97fe0;outline:none}
+.lead-quick-form button{height:46px;border:none;border-radius:10px;background:var(--purple);color:#fff;font-family:var(--fh);font-weight:800;padding:0 18px;cursor:pointer}
+.lead-quick-note{font-size:.8rem;color:var(--muted);margin-top:10px}
 /* STATS */
 .stats{background:#fff;border-bottom:1px solid var(--border);padding:36px 0}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center}
@@ -191,7 +204,8 @@ a{text-decoration:none;color:inherit}ul{list-style:none}button{cursor:pointer;fo
 .cb-arrow{color:rgba(255,255,255,.7);font-size:.9rem}
 /* RESPONSIVE */
 @media(max-width:900px){.prods-grid{grid-template-columns:1fr 1fr}.about-grid{grid-template-columns:1fr}.about-img{display:none}.revs-grid{grid-template-columns:1fr 1fr}.blog-grid{grid-template-columns:1fr}.ftr-grid{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}.nav-tabs{display:none}}
-@media(max-width:600px){.prods-grid{grid-template-columns:1fr}.ftr-grid{grid-template-columns:1fr}.cta-btns{flex-direction:column;align-items:center}.hero-cta-row{flex-direction:column;align-items:center}.nav-phone{display:none}.btn-nav-wa{padding:6px 8px;font-size:.68rem;gap:4px}.btn-nav{padding:6px 8px;font-size:.68rem}.nav-right{gap:4px}.logo{margin-right:4px}.chat-widget{bottom:16px;right:8px}.revs-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.steps-grid{grid-template-columns:1fr 1fr}.lead-quick-form{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.prods-grid{grid-template-columns:1fr}.ftr-grid{grid-template-columns:1fr}.cta-btns{flex-direction:column;align-items:center}.hero-cta-row{flex-direction:column;align-items:center}.hero-cta-row a{width:100%;max-width:360px;justify-content:center}.hero-microcopy{font-size:.8rem;max-width:340px;margin:10px auto 0;line-height:1.5}.nav-phone{display:none}.btn-nav-wa{padding:6px 8px;font-size:.68rem;gap:4px}.btn-nav{padding:6px 8px;font-size:.68rem}.nav-right{gap:4px}.logo{margin-right:4px}.chat-widget{bottom:16px;right:8px}.revs-grid{grid-template-columns:1fr}.steps-grid{grid-template-columns:1fr}.step-card{padding:18px}.lead-quick-wrap{padding:18px}.lead-quick-form{grid-template-columns:1fr}.lead-quick-form input,.lead-quick-form select,.lead-quick-form button{height:50px}}
 a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-highlight-color:rgba(123,11,154,.15)}@media(hover:none)and(pointer:coarse){.prod-card:hover,.btn-big-purple:hover,.btn-big-wa:hover,.btn-hero:hover,.btn-cotar:hover,.btn-nav:hover,.btn-nav-wa:hover,.chat-bubble-btn:hover,.blog-card:hover,.ins-card:hover,.benefit-card:hover,.faq-item:hover,.btn-cta-w:hover,.btn-cta-o:hover,.btn-purple:hover,.btn-outline:hover,.btn-outline-purple:hover,.radio-opt:hover,.ftr-soc a:hover,.ra-badge:hover,.faq-q:hover{transform:none!important;box-shadow:none!important}}
 
 /* MOBILE BOTTOM NAV - FIXED */
@@ -275,6 +289,7 @@ a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-h
       <a href="/seguro-auto" class="btn-big-purple">🚗 Cotar Seguro Auto</a>
       <a href="https://wa.me/552141421987?text=Olá!%20Quero%20uma%20cotação." target="_blank" rel="noopener" class="btn-big-wa">💬 Falar pelo WhatsApp</a>
     </div>
+    <p class="hero-microcopy"><strong>Sem compromisso e sem spam:</strong> você escolhe se quer contratar depois de comparar.</p>
   </div>
 </section>
 
@@ -285,6 +300,57 @@ a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-h
       <div class="stat-item"><span class="stat-num">5</span><span class="stat-label">Anos de experiência</span></div>
       <div class="stat-item"><span class="stat-num">5min</span><span class="stat-label">Tempo médio de cotação</span></div>
       <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Atendimento humano</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-bg" id="como-funciona">
+  <div class="w">
+    <div class="sec-head center">
+      <span class="tag">Como funciona</span>
+      <h2>Receba sua cotação em 3 passos simples</h2>
+      <p>Um processo rápido para comparar seguradoras, entender coberturas e fechar com segurança.</p>
+    </div>
+    <div class="steps-grid">
+      <article class="step-card">
+        <span class="step-num">1</span>
+        <div><h3>Envie seus dados básicos</h3><p>Escolha o tipo de seguro e informe seu WhatsApp para começarmos.</p></div>
+      </article>
+      <article class="step-card">
+        <span class="step-num">2</span>
+        <div><h3>Comparamos as seguradoras</h3><p>A equipe Luna filtra as melhores opções por preço, cobertura e perfil.</p></div>
+      </article>
+      <article class="step-card">
+        <span class="step-num">3</span>
+        <div><h3>Você decide sem pressão</h3><p>Receba as propostas com explicação clara e contrate apenas se fizer sentido.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="w">
+    <div class="lead-quick-wrap">
+      <div class="sec-head center" style="margin-bottom:0">
+        <span class="tag">Pré-cotação rápida</span>
+        <h2>Quer economizar no seguro? Comece em 30 segundos</h2>
+        <p>Preencha o mínimo e abrimos seu atendimento no WhatsApp com prioridade.</p>
+      </div>
+      <form class="lead-quick-form" id="lead-quick-form">
+        <select name="produto" required>
+          <option value="">Tipo de seguro</option>
+          <option>Seguro Auto</option>
+          <option>Seguro Moto</option>
+          <option>Seguro Caminhão</option>
+          <option>Plano de Saúde</option>
+          <option>Seguro Viagem</option>
+          <option>Consórcio</option>
+        </select>
+        <input type="text" name="nome" placeholder="Seu nome" required />
+        <input type="tel" name="fone" placeholder="WhatsApp" required />
+        <button type="submit">Quero cotar grátis</button>
+      </form>
+      <p class="lead-quick-note">Ao enviar, você concorda em receber contato da equipe Luna para sua cotação. Sem cobrança.</p>
     </div>
   </div>
 </section>
@@ -579,7 +645,8 @@ function faq(btn){
 </nav>
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(function(){});}
-(function(){var btn=document.getElementById('bnav-cotar');if(!btn)return;btn.addEventListener('click',function(e){e.preventDefault();var form=document.querySelector('.form-card,.qform-wrap,.hero-form');if(form){form.scrollIntoView({behavior:'smooth',block:'start'});return;}var p=window.location.pathname,pp=['/seguro-auto','/seguro-moto','/seguro-caminhao','/plano-saude','/seguro-viagem','/consorcio'];for(var i=0;i<pp.length;i++){if(p.indexOf(pp[i])===0){window.location.href=pp[i];return;}}window.location.href='/seguro-auto';});})();
+(function(){var btn=document.getElementById('bnav-cotar');if(!btn)return;btn.addEventListener('click',function(e){e.preventDefault();var form=document.querySelector('.form-card,.qform-wrap,.hero-form,#lead-quick-form');if(form){form.scrollIntoView({behavior:'smooth',block:'start'});return;}var p=window.location.pathname,pp=['/seguro-auto','/seguro-moto','/seguro-caminhao','/plano-saude','/seguro-viagem','/consorcio'];for(var i=0;i<pp.length;i++){if(p.indexOf(pp[i])===0){window.location.href=pp[i];return;}}window.location.href='/seguro-auto';});})();
+(function(){var form=document.getElementById('lead-quick-form');if(!form)return;form.addEventListener('submit',function(e){e.preventDefault();var fd=new FormData(form);var produto=(fd.get('produto')||'').toString().trim();var nome=(fd.get('nome')||'').toString().trim();var fone=(fd.get('fone')||'').toString().trim();if(!produto||!nome||!fone)return;var msg='Olá! Quero uma cotação grátis.\nProduto: '+produto+'\nNome: '+nome+'\nWhatsApp: '+fone;window.open('https://wa.me/552141421987?text='+encodeURIComponent(msg),'_blank','noopener');});})();
 (function(){var btn=document.querySelector('.hamburger'),menu=document.getElementById('mobMenu'),overlay=document.getElementById('mobOverlay');if(!btn||!menu)return;function toggle(){var open=menu.classList.toggle('open');btn.classList.toggle('active');overlay.classList.toggle('show');btn.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':'';}btn.addEventListener('click',toggle);overlay.addEventListener('click',toggle);menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(menu.classList.contains('open'))toggle()})});})();
 </script>
 
