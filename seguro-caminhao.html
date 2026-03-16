@@ -84,6 +84,8 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 .trust-dot{width:6px;height:6px;background:var(--green);border-radius:50%;flex-shrink:0}
 .btn-hero{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--purple);color:#fff;font-family:var(--fh);font-size:1.05rem;font-weight:800;border-radius:10px;border:none;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(123,11,154,.4)}
 .btn-hero:hover{background:var(--purple-d);transform:translateY(-2px);box-shadow:0 8px 30px rgba(123,11,154,.5)}
+.hero-microcopy{margin-top:12px;font-size:.83rem;color:rgba(255,255,255,.58)}
+.hero-microcopy strong{color:#fff}
 .hero-r{padding-bottom:0}
 .form-card{background:#fff;border-radius:18px;box-shadow:0 12px 50px rgba(0,0,0,.2);overflow:hidden;position:relative;top:0;z-index:1001}
 .form-card-head{background:var(--purple);padding:18px 24px;display:flex;align-items:center;gap:10px}
@@ -245,6 +247,10 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
   .ftr-grid{grid-template-columns:1fr}
   .cta-btns{flex-direction:column;align-items:center}
   .chat-widget{bottom:16px;right:8px}.chat-window{width:calc(100vw - 24px)}.chat-bubble-btn{padding:9px 14px 9px 9px}
+  .hero-p{font-size:1rem;line-height:1.6;margin-bottom:20px}
+  .hero-trust{gap:10px;margin-bottom:20px}
+  .btn-hero{width:100%;max-width:360px;justify-content:center;padding:15px 18px;font-size:1rem}
+  .hero-microcopy{font-size:.8rem;max-width:340px;line-height:1.5;margin:10px auto 0;text-align:center}
   .btn-nav-wa{padding:6px 8px;font-size:.68rem;gap:4px}.btn-nav{padding:6px 8px;font-size:.68rem}.nav-right{gap:4px}.logo{margin-right:4px}
 }
 a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-highlight-color:rgba(123,11,154,.15)}@media(hover:none)and(pointer:coarse){.prod-card:hover,.btn-big-purple:hover,.btn-big-wa:hover,.btn-hero:hover,.btn-cotar:hover,.btn-nav:hover,.btn-nav-wa:hover,.chat-bubble-btn:hover,.blog-card:hover,.ins-card:hover,.benefit-card:hover,.faq-item:hover,.btn-cta-w:hover,.btn-cta-o:hover,.btn-purple:hover,.btn-outline:hover,.btn-outline-purple:hover,.radio-opt:hover,.ftr-soc a:hover,.ra-badge:hover,.faq-q:hover{transform:none!important;box-shadow:none!important}}
@@ -334,6 +340,7 @@ a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-h
           <span class="trust-item"><span class="trust-dot"></span>SUSEP 202021257</span>
         </div>
         <a href="#formulario" class="btn-hero">🚛 Cotar meu seguro grátis →</a>
+        <p class="hero-microcopy"><strong>Sem compromisso e sem spam:</strong> você só contrata se a proposta fizer sentido para você.</p>
       </div>
       <div class="hero-r" id="formulario">
         <div class="form-card">
