@@ -323,6 +323,7 @@ a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-h
         </a>
         <a href="#formulario" class="btn-nav">Cotar grÃ¡tis</a>
       </div>
+      <button class="hamburger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
   </div>
 </header>
@@ -815,7 +816,6 @@ function renderFaixas(){
   const n=document.getElementById('s-beneficiarios').value;
   const qtd=n==='10+'?10:parseInt(n)||1;
   const container=document.getElementById('faixas-container');
-  if(_planoTipo==='Empresarial'){container.innerHTML='';return;}
   const faixas=['0-18 anos','19-23 anos','24-28 anos','29-33 anos','34-38 anos','39-43 anos','44-48 anos','49-53 anos','54-58 anos','59+ anos'];
   let html='<div style="margin-bottom:14px"><div style="font-size:.95rem;font-weight:700;color:#374151;margin-bottom:10px">Faixa etÃ¡ria por vida:</div>';
   for(let i=1;i<=qtd;i++){
@@ -1026,7 +1026,7 @@ function faq(btn){
   <a href="/sobre">Sobre NÃ³s</a>
   <div class="mob-cta">
     <a href="https://wa.me/552141421987" target="_blank" rel="noopener" class="mob-wa">WhatsApp</a>
-    <a href="/seguro-auto" class="mob-cotar">Cotar GrÃ¡tis</a>
+    <a href="#formulario" class="mob-cotar">Cotar GrÃ¡tis</a>
   </div>
   <div class="mob-phone">(21) 4142-1987</div>
 </nav>
