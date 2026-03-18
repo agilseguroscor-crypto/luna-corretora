@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+  <rect x="4" y="8" width="44" height="44" rx="22" fill="#EC7000"/>
+  <text x="26" y="37" font-family="Arial,sans-serif" font-weight="900" font-size="18" fill="#fff" text-anchor="middle">i</text>
+  <text x="125" y="28" font-family="Arial,sans-serif" font-weight="800" font-size="18" fill="#EC7000" text-anchor="middle">Itaú</text>
+  <text x="125" y="46" font-family="Arial,sans-serif" font-weight="600" font-size="12" fill="#555" text-anchor="middle">Consórcio</text>
+</svg>

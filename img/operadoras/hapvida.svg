@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+  <path d="M10,30 L10,15 L20,15 L20,23 L30,23 L30,15 L40,15 L40,30 Z" fill="#0D6F3F"/>
+  <path d="M10,30 L10,45 L40,45 L40,30" fill="none" stroke="#0D6F3F" stroke-width="2"/>
+  <text x="120" y="35" font-family="Arial,sans-serif" font-weight="800" font-size="22" fill="#0D6F3F" text-anchor="middle" letter-spacing="-0.5">hapvida</text>
+</svg>

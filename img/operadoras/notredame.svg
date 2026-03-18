@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60">
+  <rect x="4" y="8" width="44" height="44" rx="6" fill="#003087"/>
+  <text x="26" y="28" font-family="Arial,sans-serif" font-weight="900" font-size="11" fill="#fff" text-anchor="middle">Notre</text>
+  <text x="26" y="41" font-family="Arial,sans-serif" font-weight="900" font-size="11" fill="#C8102E" text-anchor="middle">Dame</text>
+  <text x="134" y="28" font-family="Arial,sans-serif" font-weight="700" font-size="14" fill="#003087" text-anchor="middle">NotreDame</text>
+  <text x="134" y="46" font-family="Arial,sans-serif" font-weight="700" font-size="13" fill="#C8102E" text-anchor="middle">Intermédica</text>
+</svg>
