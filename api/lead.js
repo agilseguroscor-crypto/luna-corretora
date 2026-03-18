@@ -40,7 +40,7 @@ async function getStageQualificadoId() {
   console.error('[lead] etapa "Qualificacao de Lead" nao encontrada em nenhum endpoint');
   return null;
 }
-const WA_NUMBER     = process.env.WA_NUMBER || '552141421987';
+const WA_NUMBER     = process.env.WA_NUMBER || '5521936197777';
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
