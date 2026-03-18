@@ -123,7 +123,7 @@ export default function handler(req) {
                 fontSize: '18px',
                 color: 'rgba(255,255,255,0.35)',
               },
-              children: 'lunaseguros.com.br • SUSEP 202021257',
+              children: 'lunaseguros.com.br • SUSEP 262179145',
             },
           },
         ],
