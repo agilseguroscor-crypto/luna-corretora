@@ -1,8 +1,16 @@
 // api/placa.js — Consulta de placa via apiplacas.com.br
 const TOKEN = process.env.APIPLACAS_TOKEN;
 
+const ALLOWED_ORIGINS = [
+  'https://lunaseguros.com.br', 'https://www.lunaseguros.com.br',
+];
+
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  var origin = req.headers.origin || '';
+  if (ALLOWED_ORIGINS.indexOf(origin) >= 0) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+  }
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });

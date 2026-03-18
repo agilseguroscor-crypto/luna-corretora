@@ -13,14 +13,14 @@
 <meta property="og:url" content="https://lunaseguros.com.br/"/>
 <meta property="og:title" content="Luna Seguros — Corretora na Barra da Tijuca, Rio de Janeiro"/>
 <meta property="og:description" content="Compare seguros e planos de saúde com a Luna Seguros. Cotação grátis, atendimento humano, resposta em minutos. SUSEP 262179145."/>
-<meta property="og:image" content="https://lunaseguros.com.br/og-image.jpg"/>
+<meta property="og:image" content="https://lunaseguros.com.br/api/og?title=Luna%20Seguros&desc=Corretora%20de%20Seguros%20na%20Barra%20da%20Tijuca%2C%20Rio%20de%20Janeiro&emoji=%F0%9F%90%B1"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta property="og:locale" content="pt_BR"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Luna Seguros — Corretora na Barra da Tijuca, Rio de Janeiro"/>
 <meta name="twitter:description" content="Compare seguros e planos de saúde com a Luna Seguros. Cotação grátis, atendimento humano, resposta em minutos."/>
-<meta name="twitter:image" content="https://lunaseguros.com.br/og-image.jpg"/>
+<meta name="twitter:image" content="https://lunaseguros.com.br/api/og?title=Luna%20Seguros&desc=Corretora%20de%20Seguros%20na%20Barra%20da%20Tijuca%2C%20Rio%20de%20Janeiro&emoji=%F0%9F%90%B1"/>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"InsuranceAgency","name":"Luna Seguros","alternateName":"Ágil Administração Consultoria e Corretagem de Seguros","description":"Corretora de seguros na Barra da Tijuca especializada em seguro auto, moto, caminhão, saúde e viagem.","url":"https://lunaseguros.com.br","telephone":"+55-21-93619-7777","email":"contato@lunaseguros.com.br","address":{"@type":"PostalAddress","streetAddress":"Av. das Américas, 4200","addressLocality":"Rio de Janeiro","addressRegion":"RJ","postalCode":"22640-102","addressCountry":"BR"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"17:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"11:00"}],"identifier":{"@type":"PropertyValue","name":"SUSEP","value":"262179145"}}
 </script>
@@ -651,5 +651,16 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catc
 (function(){var btn=document.querySelector('.hamburger'),menu=document.getElementById('mobMenu'),overlay=document.getElementById('mobOverlay');if(!btn||!menu)return;function toggle(){var open=menu.classList.toggle('open');btn.classList.toggle('active');overlay.classList.toggle('show');btn.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':'';}btn.addEventListener('click',toggle);overlay.addEventListener('click',toggle);menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(menu.classList.contains('open'))toggle()})});})();
 </script>
 
+<!-- LGPD Cookie Consent -->
+<div id="lgpd-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#282828;color:#fff;padding:16px 24px;font-family:inherit;font-size:14px;line-height:1.5;box-shadow:0 -2px 12px rgba(0,0,0,.35)">
+<div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+<p style="margin:0;flex:1;min-width:260px">Utilizamos cookies e ferramentas de an&aacute;lise (Google Analytics) para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa <a href="/privacidade" style="color:#c97fe0;text-decoration:underline">Pol&iacute;tica de Privacidade</a>.</p>
+<div style="display:flex;gap:10px;flex-shrink:0">
+<button onclick="document.getElementById('lgpd-banner').style.display='none';localStorage.setItem('lgpd_consent','1')" style="background:#7b0b9a;color:#fff;border:none;padding:10px 24px;border-radius:8px;font-weight:600;cursor:pointer;font-size:14px">Aceitar</button>
+<a href="/privacidade" style="color:#c97fe0;padding:10px 12px;font-size:14px;text-decoration:none">Saiba mais</a>
+</div>
+</div>
+</div>
+<script>if(!localStorage.getItem('lgpd_consent')){document.getElementById('lgpd-banner').style.display='block';}</script>
 </body>
 </html>

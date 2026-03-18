@@ -552,5 +552,16 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catc
 (function(){var btn=document.querySelector('.hamburger'),menu=document.getElementById('mobMenu'),overlay=document.getElementById('mobOverlay');if(!btn||!menu)return;function toggle(){var open=menu.classList.toggle('open');btn.classList.toggle('active');overlay.classList.toggle('show');btn.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':'';}btn.addEventListener('click',toggle);overlay.addEventListener('click',toggle);menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(menu.classList.contains('open'))toggle()})});})();
 </script>
 
+<!-- LGPD Cookie Consent -->
+<div id="lgpd-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#282828;color:#fff;padding:16px 24px;font-family:inherit;font-size:14px;line-height:1.5;box-shadow:0 -2px 12px rgba(0,0,0,.35)">
+<div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+<p style="margin:0;flex:1;min-width:260px">Utilizamos cookies e ferramentas de an&aacute;lise (Google Analytics) para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa <a href="/privacidade" style="color:#c97fe0;text-decoration:underline">Pol&iacute;tica de Privacidade</a>.</p>
+<div style="display:flex;gap:10px;flex-shrink:0">
+<button onclick="document.getElementById('lgpd-banner').style.display='none';localStorage.setItem('lgpd_consent','1')" style="background:#7b0b9a;color:#fff;border:none;padding:10px 24px;border-radius:8px;font-weight:600;cursor:pointer;font-size:14px">Aceitar</button>
+<a href="/privacidade" style="color:#c97fe0;padding:10px 12px;font-size:14px;text-decoration:none">Saiba mais</a>
+</div>
+</div>
+</div>
+<script>if(!localStorage.getItem('lgpd_consent')){document.getElementById('lgpd-banner').style.display='block';}</script>
 </body>
 </html>
