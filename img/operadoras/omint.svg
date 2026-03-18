@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 60">
+  <circle cx="26" cy="30" r="22" fill="#E30613"/>
+  <text x="26" y="35" font-family="Arial,sans-serif" font-weight="900" font-size="13" fill="#fff" text-anchor="middle">Om</text>
+  <text x="105" y="36" font-family="Arial,sans-serif" font-weight="800" font-size="22" fill="#E30613" text-anchor="middle">Omint</text>
+</svg>
