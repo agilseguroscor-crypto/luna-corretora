@@ -3,7 +3,7 @@
 
 const AGENDOR_TOKEN = process.env.AGENDOR_TOKEN;
 const AGENDOR_BASE  = 'https://api.agendor.com.br/v3';
-const FUNNEL_STAGE             = process.env.FUNNEL_STAGE              ? Number(process.env.FUNNEL_STAGE)              : 3705348;
+const FUNNEL_STAGE_ABANDONO    = process.env.FUNNEL_STAGE              ? Number(process.env.FUNNEL_STAGE)              : 3705348;
 const FUNNEL_STAGE_QUALIFICADO = process.env.FUNNEL_STAGE_QUALIFICADO  ? Number(process.env.FUNNEL_STAGE_QUALIFICADO)  : null;
 const FUNNEL_ID                = 876060;
 
@@ -13,14 +13,20 @@ async function getStageQualificadoId() {
   if (FUNNEL_STAGE_QUALIFICADO) return FUNNEL_STAGE_QUALIFICADO;
   if (_stageQualificadoId) return _stageQualificadoId;
 
-  // Agendor v3 — tenta os dois formatos de endpoint possíveis
+  // Tenta os endpoints conhecidos da API Agendor v3
   const endpoints = [
+    AGENDOR_BASE + '/funnels/' + FUNNEL_ID + '/deal_stages',
+    AGENDOR_BASE + '/deal_stages?funnel_id=' + FUNNEL_ID,
     AGENDOR_BASE + '/deal_stages?funnel=' + FUNNEL_ID,
   ];
 
   for (var i = 0; i < endpoints.length; i++) {
     try {
       const res  = await fetch(endpoints[i], { headers: agendorHeaders() });
+      if (!res.ok) {
+        console.log('[lead] endpoint', endpoints[i], '→ HTTP', res.status, '— pulando');
+        continue;
+      }
       const json = await res.json();
       const stages = json.data || [];
       console.log('[lead] endpoint', endpoints[i], '→', stages.length, 'etapas:', stages.map(function(s){ return s.name + '(' + s.id + ')'; }).join(', '));
@@ -37,10 +43,10 @@ async function getStageQualificadoId() {
     }
   }
 
-  console.error('[lead] etapa "Qualificacao de Lead" nao encontrada em nenhum endpoint');
+  console.error('[lead] etapa "Qualificacao de Lead" nao encontrada — use env FUNNEL_STAGE_QUALIFICADO');
   return null;
 }
-const WA_NUMBER     = process.env.WA_NUMBER || '552141421987';
+const WA_NUMBER = process.env.WA_NUMBER || '552141421987';
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -115,7 +121,7 @@ async function createDeal(personId, title, description, stageId) {
   const body = {
     title: title,
     funnelId: FUNNEL_ID,
-    dealStageId: stageId || FUNNEL_STAGE,
+    dealStageId: stageId,
     description: description,
   };
   const res  = await fetch(AGENDOR_BASE + '/people/' + personId + '/deals', {
@@ -289,9 +295,7 @@ module.exports = async function handler(req, res) {
     // 3. Busca por nome
     if (!person && nome.trim().length >= 3) {
       var byName = await searchPerson(nome.trim());
-      // Prioriza quem também tem o telefone parecido
       person = findByPhone(byName, fone) || null;
-      // Fallback: nome exato
       if (!person) {
         person = byName.find(function(p) {
           return p.name && p.name.toLowerCase() === nome.trim().toLowerCase();
@@ -312,13 +316,23 @@ module.exports = async function handler(req, res) {
     if (!person || !person.id) throw new Error('Falha ao obter ID do contato no Agendor');
 
     var isAbandono = (data.origem || '').toLowerCase().indexOf('abandono') >= 0;
-    var stageId = FUNNEL_STAGE;
-    if (!isAbandono) {
+    var stageId;
+
+    if (isAbandono) {
+      stageId = FUNNEL_STAGE_ABANDONO;
+      console.log('[lead] abandono → stageId:', stageId);
+    } else {
       var qualId = await getStageQualificadoId();
-      // retry uma vez se falhou
       if (!qualId) qualId = await getStageQualificadoId();
-      stageId = qualId || FUNNEL_STAGE;
-      console.log('[lead] stageId escolhido:', stageId, '| isAbandono:', isAbandono, '| qualId:', qualId);
+      if (qualId) {
+        stageId = qualId;
+      } else {
+        // Fallback: tenta usar FUNNEL_STAGE_ABANDONO apenas se não houver opção melhor
+        stageId = FUNNEL_STAGE_ABANDONO;
+        console.warn('[lead] AVISO: etapa Qualificacao nao encontrada, usando fallback stageId:', stageId);
+        console.warn('[lead] Configure env FUNNEL_STAGE_QUALIFICADO com o ID correto do Agendor');
+      }
+      console.log('[lead] qualificacao → stageId:', stageId, '| qualId:', qualId);
     }
 
     var notes = buildNotes(data);

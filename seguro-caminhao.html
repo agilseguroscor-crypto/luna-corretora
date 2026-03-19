@@ -1167,9 +1167,11 @@ function faq(btn){
 })();
 // ── ABANDONO (só dispara se saiu sem enviar) ─────────────────────
 (function(){
-  function _onLeave(){if(_passoStep2&&!_leadEnviado)salvarAbandono('Seguro Caminhão','Site - Abandono Seguro Caminhão');}
-  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')_onLeave();});
-  window.addEventListener('pagehide',_onLeave);
+  var _leaveTimer=null;
+  function _onLeave(){if(!_passoStep2||_leadEnviado)return;_leaveTimer=setTimeout(function(){if(!_leadEnviado)salvarAbandono('Seguro Caminhão','Site - Abandono Seguro Caminhão');},3000);}
+  function _onReturn(){if(_leaveTimer){clearTimeout(_leaveTimer);_leaveTimer=null;}}
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')_onLeave();else _onReturn();});
+  window.addEventListener('pagehide',function(){if(_passoStep2&&!_leadEnviado)salvarAbandono('Seguro Caminhão','Site - Abandono Seguro Caminhão');});
 })();
 </script>
 
