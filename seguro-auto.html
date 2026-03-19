@@ -199,9 +199,9 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 .step-arr{position:absolute;top:42px;right:-18px;font-size:1.5rem;color:var(--border);z-index:1}
 
 /* INSURERS */
-.ins-logos{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:16px}
-.ins-card{display:flex;align-items:center;justify-content:center;height:52px;padding:0 22px;background:#fff;border:1.5px solid var(--border);border-top:3px solid var(--purple);border-radius:8px;font-family:var(--fh);font-size:.82rem;font-weight:800;color:#555;min-width:100px;transition:all .2s}
-.ins-card:hover{border-color:var(--purple);color:var(--purple);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.ins-logos{display:flex;flex-wrap:wrap;gap:36px;justify-content:center;align-items:center;margin-top:16px}
+.ins-logo-img{height:36px;width:auto;opacity:.55;filter:grayscale(100%);transition:all .3s}
+.ins-logo-img:hover{opacity:1;filter:none}
 
 /* COVERAGE */
 .cov-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -800,14 +800,16 @@ a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-h
       <h2>Trabalhamos com as maiores seguradoras do Brasil</h2>
     </div>
     <div class="ins-logos">
-      <div class="ins-card">Porto Seguro</div>
-      <div class="ins-card">Tokio Marine</div>
-      <div class="ins-card">HDI Seguros</div>
-      <div class="ins-card">Bradesco Seguros</div>
-      <div class="ins-card">Allianz</div>
-      <div class="ins-card">Mapfre</div>
-      <div class="ins-card">Suhai</div>
-      <div class="ins-card">Sompo</div>
+      <img src="/img/seguradoras/porto.svg" alt="Porto Seguro" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/tokio-marine.svg" alt="Tokio Marine" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/hdi.svg" alt="HDI" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/bradesco-seguros.svg" alt="Bradesco Seguros" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/allianz.svg" alt="Allianz" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/mapfre.svg" alt="Mapfre" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/zurich.svg" alt="Zurich" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/sompo.svg" alt="Sompo" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/azul.svg" alt="Azul Seguros" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/suhai.svg" alt="Suhai" class="ins-logo-img" loading="lazy"/>
     </div>
   </div>
 </section>
