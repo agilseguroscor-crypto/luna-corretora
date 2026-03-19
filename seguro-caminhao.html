@@ -155,6 +155,10 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 .sec-head h2{font-family:var(--fh);font-size:clamp(1.5rem,2.8vw,2rem);font-weight:900;color:var(--grafite);line-height:1.2;margin-bottom:8px}
 .sec-head p{font-size:.98rem;color:var(--muted);max-width:520px}
 .sec-head.center{text-align:center}.sec-head.center p{margin:0 auto}
+/* INSURERS */
+.ins-logos{display:flex;flex-wrap:wrap;gap:36px;justify-content:center;align-items:center;margin-top:16px}
+.ins-logo-img{height:36px;width:auto;opacity:.55;filter:grayscale(100%);transition:all .3s}
+.ins-logo-img:hover{opacity:1;filter:none}
 .benefits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .benefit-card{display:flex;align-items:flex-start;gap:16px;padding:24px;background:#fff;border:1.5px solid var(--border);border-radius:14px;transition:box-shadow .2s}
 .benefit-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08)}
@@ -583,6 +587,26 @@ a,button,input,select,textarea,[onclick]{touch-action:manipulation;-webkit-tap-h
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSURERS -->
+<section class="sec" aria-label="Seguradoras parceiras">
+  <div class="w">
+    <div class="sec-head center">
+      <span class="tag">Nossas parceiras</span>
+      <h2>Trabalhamos com as maiores seguradoras do Brasil</h2>
+    </div>
+    <div class="ins-logos">
+      <img src="/img/seguradoras/porto.svg" alt="Porto Seguro" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/tokio-marine.svg" alt="Tokio Marine" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/hdi.svg" alt="HDI" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/bradesco-seguros.svg" alt="Bradesco Seguros" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/allianz.svg" alt="Allianz" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/mapfre.svg" alt="Mapfre" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/sompo.svg" alt="Sompo" class="ins-logo-img" loading="lazy"/>
+      <img src="/img/seguradoras/zurich.svg" alt="Zurich" class="ins-logo-img" loading="lazy"/>
     </div>
   </div>
 </section>

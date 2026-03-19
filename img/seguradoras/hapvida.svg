@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" width="120" height="60">
+  <rect width="120" height="60" fill="none"/>
+  <!-- leaf/health icon -->
+  <path d="M14 18 C14 18 8 26 8 32 C8 37 11 41 16 41 C21 41 24 37 24 32 C24 26 18 18 14 18Z" fill="#009B3A"/>
+  <path d="M14 41 L14 48" stroke="#009B3A" stroke-width="2" stroke-linecap="round"/>
+  <text x="72" y="38" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#009B3A" text-anchor="middle">hapvida</text>
+</svg>
